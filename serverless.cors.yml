@@ -1,0 +1,37 @@
+# Serverless API Gateway CORS Configuration
+
+# This file contains all environment variables for the serverless project stages. Current environments are:
+#   - dev
+#   - test
+#   - prod
+
+default: &default
+  maxAge: 86400
+  headers:
+    - Content-Type
+    - X-Amz-Date
+    - Authorization
+    - X-Api-Key
+    - X-Amz-Security-Token
+    - X-Amz-User-Agent
+  allowCredentials: false
+
+local:
+  origin:
+    - '*'
+  <<: *default
+
+dev:
+  origin:
+    - '*'
+  <<: *default
+
+test:
+  origin:
+    - '*'
+  <<: *default
+
+prod:
+  origin:
+    - '*'
+  <<: *default

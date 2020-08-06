@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  # Uncomment below to run a local instance of DynamoDB
+  dynamodb:
+    image: amazon/dynamodb-local:latest
+    entrypoint: java
+    command: '-jar DynamoDBLocal.jar -sharedDb'
+    ports:
+      - 7222:8000
+  # Uncomment below if you want to run serverless offline within a docker container
+  # api:
+  #   volumes:
+  #     - ./:/usr/app
+  #     - ~/.aws/:/root/.aws:ro
+  #   ports:
+  #     - 3001:3001
+  #     - 3000:3000
+  #     - 9228:9229
+  #   build:
+  #     context: .
+  #   command: npm start

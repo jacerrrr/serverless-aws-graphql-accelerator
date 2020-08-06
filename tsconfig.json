@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "rootDir": "src",
+    "module": "commonjs",
+    "target": "ES2019",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "preserveConstEnums": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@api/*": ["api/*"],
+      "@dal": ["dal"],
+      "@db": ["database"],
+      "@environment": ["environments"],
+      "@graphql/*": ["graphql/*"],
+      "@ioc": ["ioc"],
+      "@model": ["models"],
+      "@repo": ["repositories"],
+      "@service": ["services"],
+      "@test/*": ["testing/*"],
+      "@util": ["utils"]
+    },
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2020"]
+  }
+}

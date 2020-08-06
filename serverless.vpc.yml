@@ -1,0 +1,33 @@
+# Serverless API Gateway CORS Configuration
+
+# This file contains all environment variables for the serverless project stages. Current environments are:
+#   - dev
+#   - test
+#   - prod
+local:
+  securityGroupIds:
+    - <security-group-here>
+  subnetIds:
+    - <subnet-here>
+    - <subnet-here>
+
+dev:
+  securityGroupIds:
+    - <security-group-here>
+  subnetIds:
+    - <subnet-here>
+    - <subnet-here>
+
+test:
+  securityGroupIds:
+    - <security-group-here>
+  subnetIds:
+    - <subnet-here>
+    - <subnet-here>
+
+prod:
+  securityGroupIds:
+    - <security-group-here>
+  subnetIds:
+    - <subnet-here>
+    - <subnet-here>

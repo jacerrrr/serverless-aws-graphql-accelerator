@@ -1,0 +1,60 @@
+import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import { Inject, Service } from 'typedi';
+
+import { DI_LOGGER } from '@ioc';
+import { DynamoDB, GQLSubscriptionKeySchema, GQLSubscriptionSchema, PageSchema } from '@db';
+import { LoggerInterface } from '@util';
+
+import { DynamoDBRepository } from './dynamodb.repository';
+
+@Service()
+export class GQLSubscriptionRepository extends DynamoDBRepository {
+  constructor(@Inject(DI_LOGGER) logger: LoggerInterface, @DynamoDB() client: DocumentClient) {
+    super(logger, client, 'graphql-subscriptions');
+  }
+
+  /**
+   * Creates a a single graphql subscription record
+   * @param item The subscription to create
+   */
+  async create(item: GQLSubscriptionSchema): Promise<GQLSubscriptionSchema> {
+    return this.put(item);
+  }
+
+  /**
+   * Finds a graphql subscription record
+   * @param pk The primary key of the graphql subscription
+   * @param sk The sort key of the graphql subscription
+   */
+  async find(pk: string, sk: string): Promise<GQLSubscriptionSchema | null> {
+    return this.get({ pk, sk });
+  }
+
+  /**
+   * Fetches all graphql subscriptions for a given primary key and option sort key
+   * @param pk The primary key of the graphql subscription to fetch
+   * @param sk The sort key of the graphql subscription (if any)
+   */
+  async fetch(pk: string, sk?: string): Promise<PageSchema<GQLSubscriptionSchema, GQLSubscriptionKeySchema>> {
+    let keyCondition = 'sk = :sk and begins_with(pk, :pk)';
+    let expressionAttrNames: { [key: string]: string } = { '#pk': 'pk', '#sk': 'sk' };
+    let expressionAttrValues: { [key: string]: string | undefined } = { ':pk': pk, ':sk': sk };
+    let index: string | undefined = 'reverse';
+    if (!sk) {
+      keyCondition = 'pk = :pk';
+      expressionAttrNames = { '#pk': 'pk' };
+      expressionAttrValues = { ':pk': pk };
+      index = undefined;
+    }
+    return this.query(keyCondition, expressionAttrNames, expressionAttrValues, undefined, index);
+  }
+
+  /**
+   * Removes a graphql subscription
+   * @param pk The primary key of the subscription
+   * @param sk The secondary key of the subscription
+   */
+  async remove(pk: string, sk: string): Promise<void> {
+    return this.delete({ pk, sk });
+  }
+}

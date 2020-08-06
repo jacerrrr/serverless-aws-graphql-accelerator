@@ -1,0 +1,9 @@
+# Compiled Output #
+###################
+**/dist/*
+**/.webpack/*
+**/.nyc_output/*
+
+# Packages #
+###################
+**/node_modules/*

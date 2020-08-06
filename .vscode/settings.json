@@ -1,0 +1,8 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.associations": {
+    ".huskyrc": "json",
+    ".nycrc": "json",
+    ".prettierrc": "json"
+  }
+}

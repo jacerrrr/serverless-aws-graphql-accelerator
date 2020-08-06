@@ -1,0 +1,20 @@
+# compiled output
+dist
+.serverless
+.webpack
+.nyc_output
+
+# package directories
+.layer
+node_modules
+
+# Serverless directories
+.serverless
+
+# IDE - Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace

@@ -1,0 +1,14 @@
+# Serverless Stage/Environment Configuration
+
+# This file contains all environment variables for the serverless project stages. Current environments are:
+#   - dev
+#   - test
+#   - prod
+
+local:
+
+dev:
+
+test:
+
+prod:
