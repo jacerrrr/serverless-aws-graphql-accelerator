@@ -2,18 +2,15 @@ import { Arg, Mutation, Publisher, PubSub, Query, Resolver, Root, Subscription }
 import { Inject } from 'typedi';
 
 import { DI_LOGGER } from '@ioc';
+import { LambdaLogger } from '@core';
 import { SubscriptionClient, Topic, withFilter } from '@graphql/pubsub';
-import { LoggerInterface } from '@util';
 
 import { Hello } from './hello.model';
 import { HelloService } from './hello.service';
 
 @Resolver(() => Hello)
 export class HelloResolver {
-  constructor(
-    @Inject(DI_LOGGER) private readonly logger: LoggerInterface,
-    private readonly helloService: HelloService,
-  ) {}
+  constructor(@Inject(DI_LOGGER) private readonly logger: LambdaLogger, private readonly helloService: HelloService) {}
 
   @Query(() => Hello)
   async helloWorld(): Promise<Hello> {

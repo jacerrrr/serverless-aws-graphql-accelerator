@@ -19,6 +19,7 @@
     "skipLibCheck": true,
     "paths": {
       "@api/*": ["api/*"],
+      "@core": ["core"],
       "@dal": ["dal"],
       "@db": ["database"],
       "@environment": ["environments"],
@@ -29,7 +30,7 @@
       "@repo": ["repositories"],
       "@service": ["services"],
       "@test/*": ["testing/*"],
-      "@util": ["utils"]
+      "@util/*": ["utils/*"]
     },
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2020"]

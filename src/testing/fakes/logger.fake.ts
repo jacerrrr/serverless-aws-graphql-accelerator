@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { LoggerInterface } from '@util';
+import { LambdaLogger } from '@core';
 
-export class LoggerFake implements LoggerInterface {
+export class LoggerFake implements LambdaLogger {
   maskSecret(secret: string): void {
     // Do nothing
   }

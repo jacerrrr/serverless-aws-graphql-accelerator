@@ -2,14 +2,14 @@ import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import { Inject, Service } from 'typedi';
 
 import { DI_LOGGER } from '@ioc';
+import { LambdaLogger } from '@core';
 import { DynamoDB, GQLSubscriptionKeySchema, GQLSubscriptionSchema, PageSchema } from '@db';
-import { LoggerInterface } from '@util';
 
 import { DynamoDBRepository } from './dynamodb.repository';
 
 @Service()
 export class GQLSubscriptionRepository extends DynamoDBRepository {
-  constructor(@Inject(DI_LOGGER) logger: LoggerInterface, @DynamoDB() client: DocumentClient) {
+  constructor(@Inject(DI_LOGGER) logger: LambdaLogger, @DynamoDB() client: DocumentClient) {
     super(logger, client, 'graphql-subscriptions');
   }
 

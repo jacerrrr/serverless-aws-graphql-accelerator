@@ -2,16 +2,16 @@ import { ApolloServer } from 'apollo-server-lambda';
 import { APIGatewayEvent, APIGatewayProxyResult, Callback, Context } from 'aws-lambda';
 
 import { container, DI_ENVIRONMENT, DI_LOGGER } from '@ioc';
+import { LambdaLogger } from '@core';
 import { gqlPlaygroundEnvironment as environment } from '@environment';
 import { GQLContext } from '@graphql/context';
 import { generateSchema } from '@graphql/schema';
-import { LoggerInterface } from '@util';
 
 /* Set handler specific environment */
 container.set(DI_ENVIRONMENT, environment);
 
 const loggerClass = 'GraphQLServerHandler';
-const logger = container.get<LoggerInterface>(DI_LOGGER);
+const logger = container.get<LambdaLogger>(DI_LOGGER);
 
 const bootstrap = async (
   event: APIGatewayEvent,

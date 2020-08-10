@@ -9,12 +9,13 @@ import MessageTypes from 'subscriptions-transport-ws/dist/message-types';
 import { PubSubEngine } from 'type-graphql';
 
 import { container, DI_LOGGER } from '@ioc';
+import { LambdaLogger } from '@core';
 import { generateSchema } from '@graphql/schema';
 import { subscribe } from '@graphql/subscribe';
 import { WSEvent } from '@model';
 import { WSConnectionService, WSEventService } from '@service';
 import { WSSubscriptionService } from '@service';
-import { LoggerInterface, WSUtil } from '@util';
+import { WSUtil } from '@util/ws.util';
 
 class PubSub implements PubSubEngine {
   constructor(private readonly events: Array<WSEvent>) {
@@ -38,7 +39,7 @@ class PubSub implements PubSubEngine {
 }
 
 const handler = async (event: DynamoDBStreamEvent): Promise<void> => {
-  const logger = container.get<LoggerInterface>(DI_LOGGER);
+  const logger = container.get<LambdaLogger>(DI_LOGGER);
   global['schema'] = global['schema'] || (await generateSchema()); // tslint:disable-line
   const schema = global['schema']; // tslint:disable-line
   const connections = container.get<WSConnectionService>(WSConnectionService);

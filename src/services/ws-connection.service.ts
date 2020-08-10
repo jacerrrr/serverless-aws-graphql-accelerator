@@ -2,9 +2,9 @@ import ApiGatewayManagementApi from 'aws-sdk/clients/apigatewaymanagementapi';
 import { Inject, Service } from 'typedi';
 
 import { DI_LOGGER } from '@ioc';
+import { LambdaLogger } from '@core';
 import { WSConnection } from '@model';
 import { GQLSubscriptionRepository } from '@repo';
-import { LoggerInterface } from '@util';
 
 const pkPrefix = 'SUBSCRIPTION';
 const skPrefix = 'CONNECTION';
@@ -12,7 +12,7 @@ const skPrefix = 'CONNECTION';
 @Service()
 export class WSConnectionService {
   constructor(
-    @Inject(DI_LOGGER) private readonly logger: LoggerInterface,
+    @Inject(DI_LOGGER) private readonly logger: LambdaLogger,
     private readonly gqlSubscriptionRepo: GQLSubscriptionRepository,
   ) {}
 

@@ -2,11 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { PubSubEngine } from 'type-graphql';
 
+import { AppLogger } from '@core';
 import { DynamoDBClient } from '@db';
 import { environment } from '@environment';
 import { GQLSubscriptionRepository } from '@repo';
 import { WSEventService } from '@service';
-import { AppLogger } from '@util';
 
 /** GraphQL PubSub implementation that only supports publishing */
 export class PublishClient extends PubSubEngine {

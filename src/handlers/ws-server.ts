@@ -4,19 +4,19 @@ import { OperationMessage } from 'subscriptions-transport-ws';
 import MessageTypes from 'subscriptions-transport-ws/dist/message-types';
 
 import { container, DI_ENVIRONMENT, DI_LOGGER } from '@ioc';
+import { LambdaLogger } from '@core';
 import { gqlEnvironment } from '@environment';
 import { InvalidOperationError, MalformedOperationError } from '@graphql/errors';
 import { generateSchema } from '@graphql/schema';
 import { subscribe } from '@graphql/subscribe';
 import { HandlerHelper } from '@helper/handler.helper';
 import { WSConnectionService, WSSubscriptionService } from '@service';
-import { LoggerInterface } from '@util';
 
 /* Set handler specific environment */
 container.set(DI_ENVIRONMENT, gqlEnvironment);
 
 const loggerClass = 'WSServerHandler';
-const logger = container.get<LoggerInterface>(DI_LOGGER);
+const logger = container.get<LambdaLogger>(DI_LOGGER);
 
 const handler = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
   const supportedOpTypes = [

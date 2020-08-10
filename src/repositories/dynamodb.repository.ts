@@ -6,13 +6,13 @@ import {
   WriteRequests,
 } from 'aws-sdk/clients/dynamodb';
 
+import { LambdaLogger } from '@core';
 import { PageSchema } from '@db';
-import { LoggerInterface } from '@util';
 
 export abstract class DynamoDBRepository {
   static TransactWriteMaxBatch = 10;
   constructor(
-    protected readonly logger: LoggerInterface,
+    protected readonly logger: LambdaLogger,
     private readonly client: DocumentClient,
     private readonly table: string,
   ) {}

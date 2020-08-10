@@ -4,12 +4,12 @@ import { ResolverFn } from 'graphql-subscriptions';
 import { $$asyncIterator, createAsyncIterator } from 'iterall';
 import { OperationMessagePayload } from 'subscriptions-transport-ws';
 
+import { AppLogger } from '@core';
 import { DynamoDBClient } from '@db';
 import { environment } from '@environment';
 import { GQLSubscription } from '@model';
 import { GQLSubscriptionRepository } from '@repo';
 import { WSSubscriptionService } from '@service';
-import { AppLogger } from '@util';
 
 import { GQLSubscriptionContext } from '../context';
 

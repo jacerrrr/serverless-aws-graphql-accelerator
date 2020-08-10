@@ -2,8 +2,8 @@ import 'reflect-metadata';
 
 import { Container } from 'typedi';
 
+import { AppLogger } from '@core';
 import { environment } from '@environment';
-import { AppLogger } from '@util';
 
 import { DI_LOGGER } from './constants';
 
