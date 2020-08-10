@@ -35,6 +35,7 @@ This project uses a number of tools to ensure code quality, consistency, and per
 * [NPM](https://www.npmjs.com/) - JavaScript package manager with a number of development configuration helpers.
 * [Prettier](https://prettier.io/) - An opinionated code formatter.
 * [Serverless Framework](https://serverless.com/) - A framework enabling easy local development and deployment of Serverless API code to multiple clouds.
+* [TypeGraphQL](https://typegraphql.com/) - A modern framework for implementing GraphQL in TypeScript
 * [Visual Studio Code](https://code.visualstudio.com/) - The preferred lightweight TypeScript/JavaScript IDE.
 * [Webpack](https://webpack.js.org/) - The best JavaScript bundler.
 
