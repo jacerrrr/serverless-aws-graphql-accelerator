@@ -8,10 +8,9 @@ import { gqlEnvironment } from '@environment';
 import { InvalidOperationError, MalformedOperationError } from '@graphql/errors';
 import { generateSchema } from '@graphql/schema';
 import { subscribe } from '@graphql/subscribe';
+import { HandlerHelper } from '@helper/handler.helper';
 import { WSConnectionService, WSSubscriptionService } from '@service';
 import { LoggerInterface } from '@util';
-
-import { wsSendError, wsSendSuccess } from './ws-protocol';
 
 /* Set handler specific environment */
 container.set(DI_ENVIRONMENT, gqlEnvironment);
@@ -45,7 +44,7 @@ const handler = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> =
   }
 
   if (operation.type === MessageTypes.GQL_CONNECTION_INIT) {
-    return wsSendSuccess(MessageTypes.GQL_CONNECTION_ACK);
+    return HandlerHelper.wsSendSuccess(MessageTypes.GQL_CONNECTION_ACK);
   }
 
   const subscriptions = container.get<WSSubscriptionService>(WSSubscriptionService);
@@ -59,17 +58,17 @@ const handler = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> =
       if (!isAsyncIterable(iterable)) {
         const message = 'Subscription result did not return AsyncIterable. Record will not be processed.';
         logger.error(message, iterable, loggerClass);
-        return wsSendError(new Error(message));
+        return HandlerHelper.wsSendError(new Error(message));
       }
       const iterator = getAsyncIterator(iterable); // eslint-disable-line no-case-declarations
       await iterator.next();
-      return wsSendSuccess(MessageTypes.GQL_DATA, operation.id, { data: {} });
+      return HandlerHelper.wsSendSuccess(MessageTypes.GQL_DATA, operation.id, { data: {} });
     case MessageTypes.GQL_STOP:
       await subscriptions.unsubscribe(conn.connection, operation.id as string);
-      return wsSendSuccess(MessageTypes.GQL_COMPLETE, operation.id);
+      return HandlerHelper.wsSendSuccess(MessageTypes.GQL_COMPLETE, operation.id);
     default:
       logger.warn('WS sent message without mappable response!', {}, loggerClass);
-      return wsSendError(operation.payload as object, MessageTypes.GQL_ERROR, operation.id as string);
+      return HandlerHelper.wsSendError(operation.payload as object, MessageTypes.GQL_ERROR, operation.id as string);
   }
 };
 

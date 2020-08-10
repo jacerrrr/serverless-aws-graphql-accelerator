@@ -23,6 +23,7 @@
       "@db": ["database"],
       "@environment": ["environments"],
       "@graphql/*": ["graphql/*"],
+      "@helper/*": ["helpers/*"],
       "@ioc": ["ioc"],
       "@model": ["models"],
       "@repo": ["repositories"],
