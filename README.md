@@ -107,16 +107,44 @@ This project uses a number of tools to ensure code quality, consistency, and per
 ├── [webpack.config.js](https://webpack.js.org/configuration/)                                      # Webpack configuration for creating JavaScript bundles from the TypeScript source.
 ```
 
-### Getting Started
+## Getting Started
 
-### Run Locally
+This section contains everything you need to start development, testing, and deployment.
 
-#### API
+### NPM Scripts
 
-#### Unit Tests
+NPM scripts (defined in the `package.json`) allow your to build, test and run your application. Scripts are defined below and you can run them via `npm run <script>`:
 
-### Debug Locally
+* `build`: Concurrently runs `build:layer` and `build:app`.
+* `build:app`: Runs `clean` and then transpiles all non-spec TypeScript files in the `src` folder into the `dist` folder.
+* `build:layer`: Builds the AWS local Lambda Layer by installing node_modules in the `.layer/nodejs` folder.
+* `clean`: Removes the `dist` folder.
+* `debug`: Concurrently runs `start` and `test:watch` in order to provide dynamic unit test execution while developing (TDD).
+* `lint`: Executes eslint with the `--fix` flag to run the eslint configuration and automatically fix any issues.
+* `start:app`: Runs `serverless-offline` in debug mode (port 5858). This will launch graphql locally and allow you to attach the vscode debugger.
+* `start:dynamodb`: Runs the `docker-compose.yml` in order to start dynamodb locally at port 7222 (visit localhost:7222/shell).
+* `start`: Concurrently runs `start:app` and `start:dynamodb`.
+* `test`: Runs all unit tests with Jasmine and reports to the console.
+* `test:watch`: Runs all unit tests every time a TypeScript file is changed.
+* `test:coverage`: Generates test coverage reports for unit tests.
+* `start`: Concurrently runs `start:` and `start:dynamodb`.
 
-#### API
+### Debugging Locally with VsCode
 
-#### Unit Tests
+VsCode debug configuration is included in the project with three different configurations: These configurations will allow you to set breakpoints throughout the codebase so you can step through your code within the VSCode IDE.
+
+* Attach - Attaches VSCode debugger to existing process. After running `npm start` to start serverless, click on the Attach run execution and make calls to api to step through your code.
+* Debug - Runs `npm start` and attaches the debugger at the same time. Start debugging GraphQL in one fell swoop!
+* Debug Unit Tests - Executes unit tests with attached debugger. Set breakpoints in your unit tests to step through your test code!
+
+### Experimenting with GraphQL via the GraphQL Playground
+
+After starting GraphQL via `npm start`, navigate to [localhost:3000](http://localhost:3000). You can see your latest GraphQL schema, along with documentation on various operations. You can execute queries, mutations, and subscriptions within the playground.
+
+#### GraphQL Subscriptions
+
+GraphQL Subscriptions are powered by WebSockets. Serverless WebSocket functionality is partially enabled by DynamoDB storage of WebSocket connections. However, DynamoDB streams are not supported locally, therefore subscriptions message will not be sent to other connected clients on your local machine. Subscriptions can only be fully tested once deployed.
+
+## Deployment
+
+To deploy to AWS, you only need to run `npx serverless deploy --stage dev` (you can use any stage, but dev is most appropriate in this case) from the project root. Make sure the AWS CLI is setup to use credentials that have Admin Access so you can deploy the resources defined in this application.
