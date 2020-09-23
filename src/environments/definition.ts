@@ -1,5 +1,6 @@
 export interface Environment {
-  env: string;
+  application: string;
+  environment: string;
   logLevel: string;
   origin: string;
   region: string;

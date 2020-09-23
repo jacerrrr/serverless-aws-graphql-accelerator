@@ -49,7 +49,8 @@ provider:
   websocketsApiName: ${self:provider.stage}-ws-${self:service}
   # deploymentBucket: deployments
   environment: # Global environment variables
-    NODE_ENV: ${file(serverless.env.yml):${self:provider.stage}.NODE_ENV}
+    APPLICATION: ${self:service}
+    ENVIRONMENT: ${self:provider.stage}
     LOG_LEVEL: ${file(serverless.env.yml):${self:provider.stage}.LOG_LEVEL}
 
   # you can overwrite defaults here
@@ -108,8 +109,15 @@ functions:
     handler: src/handlers/server.handler
     # vpc: ${file(serverless.vpc.yml):${self:provider.stage}}
     environment: # Function environment variables (inherits from global)
-      WS_URL: ${file(serverless.env.yml):${self:provider.stage}.WS_URL}
       CORS_ORIGIN: ${file(serverless.env.yml):${self:provider.stage}.CORS_ORIGIN}
+      WS_URL:
+        Fn::Join:
+          - ''
+          - - Ref: WebsocketsApi
+            - .execute-api.
+            - Ref: AWS::Region
+            - .amazonaws.com/
+            - ${self:provider.stage}
     events:
       - http:
           path: /

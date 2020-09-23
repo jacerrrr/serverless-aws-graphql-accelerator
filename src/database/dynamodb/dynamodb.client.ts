@@ -9,7 +9,7 @@ export class DynamoDBClient {
   static getInstance(): DocumentClient {
     if (DynamoDBClient.client == null) {
       let options: ClientConfiguration = {};
-      if (environment.env === 'local') {
+      if (environment.environment === 'local') {
         options = {
           region: 'localhost',
           endpoint: 'http://localhost:7222',

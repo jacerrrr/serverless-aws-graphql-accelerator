@@ -1,7 +1,8 @@
 import { Environment, GQLEnvironment, GQLPlaygroundEnvironment } from './definition';
 
 export const environment: Environment = {
-  env: process.env.NODE_ENV as string,
+  application: process.env.APPLICATION as string,
+  environment: process.env.ENVIRONMENT as string,
   logLevel: process.env.LOG_LEVEL as string,
   origin: process.env.CORS_ORIGIN as string,
   region: process.env.AWS_REGION as string,
