@@ -61,7 +61,8 @@ export class WSConnectionService {
 
   async deregister(connectionId: string): Promise<void> {
     const connections = await this.gqlSubscriptionRepo.fetch(`${pkPrefix}|`, `${skPrefix}|${connectionId}`);
-    const disconnects = connections.items.map(async connection =>
+    this.logger.info(`Found ${connections.items.length} to deregister`, connections, this.constructor.name);
+    const disconnects = connections.items.map(connection =>
       this.gqlSubscriptionRepo.remove(connection.pk, connection.sk),
     );
     await Promise.all(disconnects);

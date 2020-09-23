@@ -30,11 +30,7 @@ export abstract class DynamoDBRepository {
         },
         (error, data) => {
           if (error !== null) {
-            this.logger.error(
-              `Failed to get pricing data from DynamoDB: ${error.message}`,
-              error,
-              this.constructor.name,
-            );
+            this.logger.error(`Failed to get data from DynamoDB: ${error.message}`, error, this.constructor.name);
             reject(error);
             return;
           }
@@ -44,7 +40,7 @@ export abstract class DynamoDBRepository {
     );
 
     if (schema === undefined) {
-      this.logger.warn('Could not find pricing record for key:', key, this.constructor.name);
+      this.logger.warn('Could not find record for key:', key, this.constructor.name);
       return null;
     }
     return schema as T;
@@ -86,11 +82,7 @@ export abstract class DynamoDBRepository {
           }),
         )
         .catch(error => {
-          this.logger.error(
-            `Failed to query pricing data from DynamoDB: ${error.message}`,
-            error,
-            this.constructor.name,
-          );
+          this.logger.error(`Failed to query data from DynamoDB: ${error.message}`, error, this.constructor.name);
           return reject(error);
         }),
     );

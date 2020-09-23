@@ -76,7 +76,10 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource:
-        - Fn::GetAtt: [GQLSubscriptionsTable, Arn]
+        - Fn::Join:
+            - ''
+            - - Fn::GetAtt: [GQLSubscriptionsTable, Arn]
+              - '*'
 
 # you can define service wide environment variables here
 #  environment:

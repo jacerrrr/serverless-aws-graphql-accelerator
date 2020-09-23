@@ -42,7 +42,7 @@ export class GQLSubscriptionRepository extends DynamoDBRepository {
    * @param sk The sort key of the graphql subscription (if any)
    */
   async fetch(pk: string, sk?: string): Promise<PageSchema<GQLSubscriptionSchema, GQLSubscriptionKeySchema>> {
-    let keyCondition = 'sk = :sk and begins_with(pk, :pk)';
+    let keyCondition = '#sk = :sk and begins_with(#pk, :pk)';
     let expressionAttrNames: { [key: string]: string } = { '#pk': 'pk', '#sk': 'sk' };
     let expressionAttrValues: { [key: string]: string | undefined } = { ':pk': pk, ':sk': sk };
     let index: string | undefined = 'reverse';
