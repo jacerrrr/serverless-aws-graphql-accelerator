@@ -8,14 +8,18 @@ import { OperationMessage } from 'subscriptions-transport-ws';
 import MessageTypes from 'subscriptions-transport-ws/dist/message-types';
 import { PubSubEngine } from 'type-graphql';
 
-import { container, DI_LOGGER } from '@ioc';
+import { container, DI_ENVIRONMENT, DI_LOGGER } from '@ioc';
 import { LambdaLogger } from '@core';
+import { environment } from '@environment';
 import { generateSchema } from '@graphql/schema';
 import { subscribe } from '@graphql/subscribe';
 import { WSEvent } from '@model';
 import { WSConnectionService, WSEventService } from '@service';
 import { WSSubscriptionService } from '@service';
 import { WSUtil } from '@util/ws.util';
+
+/* Set handler specific environment */
+container.set(DI_ENVIRONMENT, environment);
 
 class PubSub implements PubSubEngine {
   constructor(private readonly events: Array<WSEvent>) {

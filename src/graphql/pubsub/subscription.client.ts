@@ -28,7 +28,7 @@ export class SubscriptionClient {
     if (SubscriptionClient.instance == null) {
       SubscriptionClient.instance = new SubscriptionClient(
         new WSSubscriptionService(
-          new GQLSubscriptionRepository(new AppLogger(environment), DynamoDBClient.getInstance()),
+          new GQLSubscriptionRepository(environment, new AppLogger(environment), DynamoDBClient.getInstance()),
         ),
       );
     }

@@ -1,11 +1,14 @@
 import { APIGatewayEvent, APIGatewayProxyResult } from 'aws-lambda';
 import MessageTypes from 'subscriptions-transport-ws/dist/message-types';
 
-import { container, DI_LOGGER } from '@ioc';
+import { container, DI_ENVIRONMENT, DI_LOGGER } from '@ioc';
 import { LambdaLogger } from '@core';
 import { environment } from '@environment';
 import { HandlerHelper } from '@helper/handler.helper';
 import { WSConnectionService } from '@service';
+
+/* Set handler specific environment */
+container.set(DI_ENVIRONMENT, environment);
 
 const deriveEndpoint = (apiId: string, region: string, stage: string): string =>
   `${apiId}.execute-api.${region}.amazonaws.com/${stage}`;

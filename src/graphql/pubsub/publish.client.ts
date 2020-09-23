@@ -15,7 +15,9 @@ export class PublishClient extends PubSubEngine {
   static getInstance(): PubSubEngine {
     if (PublishClient.instance == null) {
       PublishClient.instance = new PublishClient(
-        new WSEventService(new GQLSubscriptionRepository(new AppLogger(environment), DynamoDBClient.getInstance())),
+        new WSEventService(
+          new GQLSubscriptionRepository(environment, new AppLogger(environment), DynamoDBClient.getInstance()),
+        ),
       );
     }
     return PublishClient.instance;
