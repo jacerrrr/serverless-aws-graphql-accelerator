@@ -47,7 +47,7 @@ export class GQLSubscriptionRepository extends DynamoDBRepository {
     let expressionAttrValues: { [key: string]: string | undefined } = { ':pk': pk, ':sk': sk };
     let index: string | undefined = 'reverse';
     if (!sk) {
-      keyCondition = 'pk = :pk';
+      keyCondition = '#pk = :pk';
       expressionAttrNames = { '#pk': 'pk' };
       expressionAttrValues = { ':pk': pk };
       index = undefined;
