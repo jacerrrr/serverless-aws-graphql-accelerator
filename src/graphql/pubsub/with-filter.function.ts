@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { isObject } from 'util';
-
 import { GraphQLResolveInfo } from 'graphql';
 import { ResolverFn } from 'graphql-subscriptions';
 import { $$asyncIterator } from 'iterall';
@@ -27,7 +25,7 @@ const withFilter = (asyncIteratorFn: ResolverFn, filterFn: FilterFn): ResolverFn
     if (payload.done) {
       return payload;
     }
-    if (!isObject(payload.value)) {
+    if (payload.value !== null && typeof payload.value === 'object') {
       return payload;
     }
 
