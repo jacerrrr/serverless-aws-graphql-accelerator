@@ -25,7 +25,7 @@ const handler = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> =
       connection: event.requestContext.connectionId as string,
       endpoint: deriveEndpoint(event.requestContext.apiId, environment.region, event.requestContext.stage),
     });
-    return HandlerHelper.wsSendSuccess(MessageTypes.GQL_CONNECTION_ACK);
+    return HandlerHelper.wsSendSuccess(MessageTypes.GQL_CONNECTION_KEEP_ALIVE);
   } catch (e) {
     logger.error('Error occurred within handler.', e);
     return HandlerHelper.wsSendError(e, MessageTypes.GQL_CONNECTION_ERROR);
