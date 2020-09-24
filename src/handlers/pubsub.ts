@@ -19,7 +19,7 @@ import { WSSubscriptionService } from '@service';
 import { WSUtil } from '@util/ws.util';
 
 /* Set handler specific environment */
-container.set(DI_ENVIRONMENT, environment);
+container.set({ id: DI_ENVIRONMENT, factory: () => environment });
 
 class PubSub implements PubSubEngine {
   constructor(private readonly events: Array<WSEvent>) {

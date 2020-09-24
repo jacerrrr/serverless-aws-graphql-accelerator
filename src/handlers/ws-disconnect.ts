@@ -7,7 +7,7 @@ import { environment } from '@environment';
 import { WSConnectionService } from '@service';
 
 /* Set handler specific environment */
-container.set(DI_ENVIRONMENT, environment);
+container.set({ id: DI_ENVIRONMENT, factory: () => environment });
 
 const handler = async (event: APIGatewayEvent): Promise<void> => {
   const connections = container.get(WSConnectionService);

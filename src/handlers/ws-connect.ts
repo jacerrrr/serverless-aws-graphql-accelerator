@@ -8,7 +8,7 @@ import { HandlerHelper } from '@helper/handler.helper';
 import { WSConnectionService } from '@service';
 
 /* Set handler specific environment */
-container.set(DI_ENVIRONMENT, environment);
+container.set({ id: DI_ENVIRONMENT, factory: () => environment });
 
 const deriveEndpoint = (apiId: string, region: string, stage: string): string =>
   `${apiId}.execute-api.${region}.amazonaws.com/${stage}`;

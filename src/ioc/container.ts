@@ -7,6 +7,6 @@ import { environment } from '@environment';
 
 import { DI_LOGGER } from './constants';
 
-Container.set(DI_LOGGER, new AppLogger(environment));
+Container.set({ id: DI_LOGGER, factory: () => new AppLogger(environment) });
 
 export const container = Container;

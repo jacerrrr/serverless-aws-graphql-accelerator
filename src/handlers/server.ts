@@ -8,7 +8,7 @@ import { GQLContext } from '@graphql/context';
 import { generateSchema } from '@graphql/schema';
 
 /* Set handler specific environment */
-container.set(DI_ENVIRONMENT, environment);
+container.set({ id: DI_ENVIRONMENT, factory: () => environment });
 
 const loggerClass = 'GraphQLServerHandler';
 const logger = container.get<LambdaLogger>(DI_LOGGER);
@@ -18,7 +18,6 @@ const bootstrap = async (
 ): Promise<(event: APIGatewayEvent, context: Context, callback: Callback<APIGatewayProxyResult>) => void> => {
   global['schema'] = global['schema'] || (await generateSchema()); // tslint:disable-line
   const schema = global['schema']; // tslint:disable-line
-
   // Ignore warmup requests w no headers
   if (event.headers === undefined) {
     return Promise.resolve(() => {
@@ -35,6 +34,7 @@ const bootstrap = async (
         container: reqContainer,
         // Pass in user to the context here
       };
+
       reqContainer.set('context', context); // place context or other data in container
       return context;
     },

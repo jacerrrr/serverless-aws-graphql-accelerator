@@ -13,7 +13,7 @@ import { HandlerHelper } from '@helper/handler.helper';
 import { WSConnectionService, WSSubscriptionService } from '@service';
 
 /* Set handler specific environment */
-container.set(DI_ENVIRONMENT, gqlEnvironment);
+container.set({ id: DI_ENVIRONMENT, factory: () => gqlEnvironment });
 
 const loggerClass = 'WSServerHandler';
 const logger = container.get<LambdaLogger>(DI_LOGGER);
