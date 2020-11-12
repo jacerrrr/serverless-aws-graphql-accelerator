@@ -139,7 +139,7 @@ VsCode debug configuration is included in the project with three different confi
 
 ### Experimenting with GraphQL via the GraphQL Playground
 
-After starting GraphQL via `npm start`, navigate to [localhost:3000](http://localhost:3000). You can see your latest GraphQL schema, along with documentation on various operations. You can execute queries, mutations, and subscriptions within the playground.
+After starting GraphQL via `npm start`, navigate to [localhost:3000](http://localhost:3000). You can see your latest GraphQL schema, along with documentation on various operations. You can execute queries, mutations, and subscriptions within the playground. Please note, subscriptions will not work locally and cannot be verified without deployment.
 
 #### GraphQL Subscriptions
 
