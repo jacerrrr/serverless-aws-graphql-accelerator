@@ -77,7 +77,7 @@
   "dependencies": {
     "apollo-server-core": "^2.15.1",
     "apollo-server-lambda": "^2.15.1",
-    "class-validator": "^0.12.2",
+    "class-validator": "^0.14.0",
     "graphql": "^15.3.0",
     "reflect-metadata": "^0.1.13",
     "subscriptions-transport-ws": "^0.9.17",
